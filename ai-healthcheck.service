@@ -1,0 +1,18 @@
+[Unit]
+Description=AI Inference Health Check Script
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+# 把下面两行的用户名和路径改成你自己的
+User=YOUR_USERNAME
+WorkingDirectory=/home/YOUR_USERNAME/ai-infra-monitor
+ExecStart=/home/YOUR_USERNAME/ai-infra-monitor/health_check.sh
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/ai-healthcheck.log
+StandardError=append:/var/log/ai-healthcheck-error.log
+
+[Install]
+WantedBy=multi-user.target
